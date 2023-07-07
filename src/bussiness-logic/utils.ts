@@ -19,6 +19,6 @@ export type Decoded = {
 export interface RequestBody {
     startDate: string;
     endDate: string;
-  }
+    }
 
 export const prisma = new PrismaClient()
