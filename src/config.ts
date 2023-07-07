@@ -1,0 +1,2 @@
+export const ACCESS_TOKEN_KEY = "JKDWBFKJEBKDSNCKDHBAKBCYFG3663"
+export const REFRESH_TOKEN_KEY = "kjfhkwhfkwjfhkjwf353457627"

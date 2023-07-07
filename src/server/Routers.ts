@@ -1,41 +1,30 @@
 import { Router } from "express";
-import { 
-    createBill,
-    createCategory,
-    createUser,
-    deleteBill,
-    deleteCategory,
-    deleteUser, getBill,
-    getBills,
-    getCategories,
-    getCategory,
-    getUser,
-    getUsers } from "./controllers";
+import { createBill, deleteBill, getBill, getBills} from "./controllers/billsControllers";
+import { createCategory, deleteCategory, getCategory, getCategories  } from "./controllers/categoriesControllers";
+import { loginAuth, refreshAuthToken, registerAuth, verifyToken } from "./controllers/authControllers";
 
-export const usersRouter = Router();
 export const billsRouter = Router();
 export const categoriesRouter = Router();
+export const authRouter = Router();
 
-usersRouter.get("/", getUsers);
+authRouter.post("/login", loginAuth);
 
-usersRouter.post("/", createUser);
+authRouter.post("/register", registerAuth)
 
-usersRouter.get("/:id", getUser);
+authRouter.post("/refresh", refreshAuthToken)
 
-usersRouter.delete("/:id", deleteUser);
+billsRouter.get("/", verifyToken, getBills);
 
-billsRouter.get("/", getBills);
+billsRouter.post("/", verifyToken, createBill);
 
-billsRouter.post("/", createBill);
+billsRouter.get("/:id", verifyToken, getBill);
 
-billsRouter.get("/:id", getBill);
+billsRouter.delete("/:id", verifyToken, deleteBill);
 
-billsRouter.delete("/:id", deleteBill);
+categoriesRouter.get("/", verifyToken, getCategories);
 
-categoriesRouter.get("/", getCategories);
+categoriesRouter.post("/", verifyToken, createCategory);
 
-categoriesRouter.post("/", createCategory);
+categoriesRouter.get("/:id", verifyToken, getCategory);
 
-categoriesRouter.get("/:id", getCategory);
-
-categoriesRouter.delete("/:id", deleteCategory);
+categoriesRouter.delete("/:id", verifyToken, deleteCategory);
